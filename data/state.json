@@ -2,7 +2,14 @@
   "schemaVersion": 1,
   "timezone": "Asia/Kolkata",
   "maxRunDays": 10,
-  "monitorStartedAt": null,
-  "runDays": [],
+  "monitorStartedAt": "2026-09-28T18:30:00.000Z",
+  "runDays": [
+    {
+      "date": "2026-09-29",
+      "status": "partial",
+      "startedAt": "2026-09-29T09:04:30.734Z",
+      "finishedAt": "2026-09-29T09:04:55.530Z"
+    }
+  ],
   "cursors": {}
 }
