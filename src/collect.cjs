@@ -34,6 +34,18 @@ function nextRunAllowed(state, today, force = false) {
   return { allowed: true, reason: null };
 }
 
+function recordSuccessfulRunDay(state, report) {
+  if (!report.accounts.some(account => account.status === 'searched')) return false;
+  state.runDays = (state.runDays || []).filter(run => (typeof run === 'string' ? run : run.date) !== report.date);
+  state.runDays.push({
+    date: report.date,
+    status: report.status,
+    startedAt: report.startedAt,
+    finishedAt: report.finishedAt
+  });
+  return true;
+}
+
 async function renderedPosts(page, handle, observedAt) {
   const raw = await page.locator('[data-testid="tweet"]').evaluateAll(elements => elements.map(element => {
     const time = element.querySelector('time');
@@ -243,16 +255,18 @@ async function run() {
   }
 
   report.finishedAt = new Date().toISOString();
-  report.status = report.accounts.every(account => account.status === 'searched') ? 'complete' : 'partial';
-  stores.state.runDays = (stores.state.runDays || []).filter(run => (typeof run === 'string' ? run : run.date) !== today);
-  stores.state.runDays.push({ date: today, status: report.status, startedAt: report.startedAt, finishedAt: report.finishedAt });
+  const searchedAccounts = report.accounts.filter(account => account.status === 'searched').length;
+  report.status = searchedAccounts === report.accounts.length ? 'complete' : searchedAccounts ? 'partial' : 'failed';
+  const counted = recordSuccessfulRunDay(stores.state, report);
   stores.posts.updatedAt = report.finishedAt;
   stores.followers.updatedAt = report.finishedAt;
   await saveStores(stores);
   await fs.mkdir(path.join(DATA_DIR, 'reports'), { recursive: true });
   await writeJsonAtomic(path.join(DATA_DIR, 'reports', `${today}.json`), report);
-  console.log(`Run ${stores.state.runDays.length}/${MAX_RUN_DAYS}: ${report.status}.`);
-  if (!report.accounts.some(account => account.status === 'searched')) process.exitCode = 1;
+  console.log(counted
+    ? `Run ${stores.state.runDays.length}/${MAX_RUN_DAYS}: ${report.status}.`
+    : `Run not counted: no account search succeeded (${report.status}).`);
+  if (!counted) process.exitCode = 1;
   return report;
 }
 
@@ -267,4 +281,4 @@ if (require.main === module) {
   }).finally(() => clearTimeout(watchdog));
 }
 
-module.exports = { searchUrl, initialMonitorStart, nextRunAllowed, renderedPosts, scrapeAccount, run };
+module.exports = { searchUrl, initialMonitorStart, nextRunAllowed, recordSuccessfulRunDay, renderedPosts, scrapeAccount, run };

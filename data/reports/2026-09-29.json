@@ -44,6 +44,6 @@
       "retryAt": null
     }
   ],
-  "status": "partial",
+  "status": "failed",
   "finishedAt": "2026-09-29T09:04:55.530Z"
 }

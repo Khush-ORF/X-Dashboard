@@ -6,7 +6,7 @@ const { ROOT, canonicalPostUrl, dateInZone } = require('../src/config.cjs');
 const { cookieState } = require('../src/cookies.cjs');
 const { extractTweets, exactFollowerCount, metricFromLabel } = require('../src/x-data.cjs');
 const { mergePosts, appendFollower } = require('../src/store.cjs');
-const { nextRunAllowed, initialMonitorStart, searchUrl } = require('../src/collect.cjs');
+const { nextRunAllowed, initialMonitorStart, recordSuccessfulRunDay, searchUrl } = require('../src/collect.cjs');
 const { scriptJson } = require('../src/dashboard.cjs');
 
 test('cookie import keeps only required X authentication values', () => {
@@ -61,6 +61,17 @@ test('ten-day scheduler counts distinct India dates', () => {
   assert.equal(nextRunAllowed(state, '2026-09-10', true).allowed, true);
   assert.equal(dateInZone(new Date('2026-09-29T18:31:00Z')), '2026-09-30');
   assert.equal(initialMonitorStart(new Date('2026-09-29T18:31:00Z')), '2026-09-29T18:30:00.000Z');
+});
+
+test('failed attempts do not consume a monitoring day', () => {
+  const state = { runDays: [] };
+  const failed = { date: '2026-09-29', status: 'failed', startedAt: 'start', finishedAt: 'finish', accounts: [{ status: 'failed' }] };
+  assert.equal(recordSuccessfulRunDay(state, failed), false);
+  assert.deepEqual(state.runDays, []);
+
+  const partial = { ...failed, status: 'partial', accounts: [{ status: 'searched' }, { status: 'failed' }] };
+  assert.equal(recordSuccessfulRunDay(state, partial), true);
+  assert.equal(state.runDays.length, 1);
 });
 
 test('search query is scoped to one validated account and date window', () => {
