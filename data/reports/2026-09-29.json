@@ -1,6 +1,6 @@
 {
   "date": "2026-09-29",
-  "startedAt": "2026-09-29T09:04:30.734Z",
+  "startedAt": "2026-09-29T16:49:12.837Z",
   "timezone": "Asia/Kolkata",
   "accounts": [
     {
@@ -45,5 +45,5 @@
     }
   ],
   "status": "failed",
-  "finishedAt": "2026-09-29T09:04:55.530Z"
+  "finishedAt": "2026-09-29T16:49:37.627Z"
 }
