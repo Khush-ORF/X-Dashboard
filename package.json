@@ -1,0 +1,20 @@
+{
+  "name": "x-dashboard-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ten-day incremental X account monitor and static dashboard",
+  "type": "commonjs",
+  "scripts": {
+    "collect": "node src/collect.cjs",
+    "build": "node src/dashboard.cjs",
+    "import:existing": "node src/import-existing.cjs",
+    "preview": "node src/preview.cjs",
+    "test": "node --test test/*.test.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright": "1.62.1"
+  }
+}

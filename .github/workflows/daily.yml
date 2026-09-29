@@ -1,0 +1,81 @@
+name: Daily X dashboard
+
+on:
+  schedule:
+    # GitHub cron uses UTC. 16:30 UTC is 22:00 Asia/Kolkata.
+    - cron: "30 16 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Run again even if today's checkpoint exists
+        required: false
+        default: "0"
+
+concurrency:
+  group: daily-x-dashboard
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  collect-build-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      - name: Check secret configuration
+        shell: bash
+        env:
+          X_COOKIES: ${{ secrets.X_COOKIES }}
+        run: test -n "$X_COOKIES" || { echo "Configure the X_COOKIES Actions secret."; exit 1; }
+
+      - name: Collect incremental posts and exact follower counts
+        id: collect
+        continue-on-error: true
+        env:
+          X_COOKIES: ${{ secrets.X_COOKIES }}
+          FORCE_RUN: ${{ github.event.inputs.force || '0' }}
+        run: npm run collect
+
+      - run: npm run build
+      - run: npm test
+
+      - name: Commit public data and dashboard
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data docs exports
+          if ! git diff --cached --quiet; then
+            git commit -m "Update X dashboard $(date -u +%F)"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - name: Deploy dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Report collection failure
+        if: steps.collect.outcome == 'failure'
+        run: exit 1

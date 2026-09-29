@@ -1,0 +1,10 @@
+node_modules/
+.env
+*.log
+playwright-report/
+test-results/
+data/*.tmp
+docs/*.tmp
+exports/*.tmp
+session.json
+cookies.json
