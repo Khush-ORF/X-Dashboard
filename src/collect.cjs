@@ -192,7 +192,10 @@ async function run() {
   const storageState = cookiesFromEnvironment();
   stores.state.monitorStartedAt ||= initialMonitorStart(now);
   const report = { date: today, startedAt: now.toISOString(), timezone: TIME_ZONE, accounts: [], status: 'running' };
-  const browser = await chromium.launch({ headless: true, chromiumSandbox: true });
+  const browser = await chromium.launch({
+    headless: true,
+    chromiumSandbox: process.env.GITHUB_ACTIONS !== 'true',
+  });
   let haltForRateLimit = false;
   try {
     const context = await browser.newContext({ storageState, viewport: { width: 1280, height: 1800 } });
