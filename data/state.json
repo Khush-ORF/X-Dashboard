@@ -3,6 +3,18 @@
   "timezone": "Asia/Kolkata",
   "maxRunDays": 10,
   "monitorStartedAt": "2026-09-28T18:30:00.000Z",
-  "runDays": [],
-  "cursors": {}
+  "runDays": [
+    {
+      "date": "2026-10-23",
+      "status": "complete",
+      "startedAt": "2026-10-22T20:15:55.633Z",
+      "finishedAt": "2026-10-22T20:19:59.996Z"
+    }
+  ],
+  "cursors": {
+    "orfonline": "2026-10-22T20:15:57.015Z",
+    "BrookingsInst": "2026-10-22T20:17:23.092Z",
+    "ChathamHouse": "2026-10-22T20:17:42.739Z",
+    "RANDCorporation": "2026-10-22T20:19:07.495Z"
+  }
 }
