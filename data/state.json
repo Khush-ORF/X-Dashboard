@@ -9,12 +9,18 @@
       "status": "complete",
       "startedAt": "2026-10-22T20:15:55.633Z",
       "finishedAt": "2026-10-22T20:19:59.996Z"
+    },
+    {
+      "date": "2026-11-21",
+      "status": "complete",
+      "startedAt": "2026-11-20T22:46:51.660Z",
+      "finishedAt": "2026-11-20T22:50:28.541Z"
     }
   ],
   "cursors": {
-    "orfonline": "2026-10-22T20:15:57.015Z",
-    "BrookingsInst": "2026-10-22T20:17:23.092Z",
-    "ChathamHouse": "2026-10-22T20:17:42.739Z",
-    "RANDCorporation": "2026-10-22T20:19:07.495Z"
+    "orfonline": "2026-11-20T22:46:55.165Z",
+    "BrookingsInst": "2026-11-20T22:48:20.873Z",
+    "ChathamHouse": "2026-11-20T22:48:44.513Z",
+    "RANDCorporation": "2026-11-20T22:50:09.199Z"
   }
 }

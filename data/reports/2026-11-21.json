@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-21",
+  "startedAt": "2026-11-20T22:46:51.660Z",
+  "timezone": "Asia/Kolkata",
+  "accounts": [
+    {
+      "handle": "orfonline",
+      "status": "searched",
+      "added": 96,
+      "stored": 1546,
+      "exactFollowersCaptured": false,
+      "searchResponses": 5,
+      "stopReason": "pass-limit"
+    },
+    {
+      "handle": "BrookingsInst",
+      "status": "searched",
+      "added": 17,
+      "stored": 30,
+      "exactFollowersCaptured": false,
+      "searchResponses": 2,
+      "stopReason": "previous-cursor-reached"
+    },
+    {
+      "handle": "ChathamHouse",
+      "status": "searched",
+      "added": 78,
+      "stored": 279,
+      "exactFollowersCaptured": false,
+      "searchResponses": 5,
+      "stopReason": "pass-limit"
+    },
+    {
+      "handle": "RANDCorporation",
+      "status": "searched",
+      "added": 20,
+      "stored": 95,
+      "exactFollowersCaptured": false,
+      "searchResponses": 1,
+      "stopReason": "search-exhausted-or-stalled"
+    }
+  ],
+  "status": "complete",
+  "finishedAt": "2026-11-20T22:50:28.541Z"
+}
