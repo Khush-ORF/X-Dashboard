@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-24",
+  "startedAt": "2026-11-24T03:04:38.262Z",
+  "timezone": "Asia/Kolkata",
+  "accounts": [
+    {
+      "handle": "orfonline",
+      "status": "failed",
+      "added": 0,
+      "stored": 1546,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "Search navigation returned HTTP 403.",
+      "retryAt": null
+    },
+    {
+      "handle": "BrookingsInst",
+      "status": "failed",
+      "added": 0,
+      "stored": 30,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "Profile navigation returned HTTP 403.",
+      "retryAt": null
+    },
+    {
+      "handle": "ChathamHouse",
+      "status": "failed",
+      "added": 0,
+      "stored": 279,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "X authentication is unavailable.",
+      "retryAt": null
+    },
+    {
+      "handle": "RANDCorporation",
+      "status": "failed",
+      "added": 0,
+      "stored": 95,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "X authentication is unavailable.",
+      "retryAt": null
+    }
+  ],
+  "status": "failed",
+  "finishedAt": "2026-11-24T03:05:17.923Z"
+}
