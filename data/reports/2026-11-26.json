@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-26",
+  "startedAt": "2026-11-26T00:37:08.113Z",
+  "timezone": "Asia/Kolkata",
+  "accounts": [
+    {
+      "handle": "orfonline",
+      "status": "failed",
+      "added": 0,
+      "stored": 1546,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "Profile navigation returned HTTP 403.",
+      "retryAt": null
+    },
+    {
+      "handle": "BrookingsInst",
+      "status": "failed",
+      "added": 0,
+      "stored": 30,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "Profile navigation returned HTTP 403.",
+      "retryAt": null
+    },
+    {
+      "handle": "ChathamHouse",
+      "status": "failed",
+      "added": 0,
+      "stored": 279,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "Profile navigation returned HTTP 403.",
+      "retryAt": null
+    },
+    {
+      "handle": "RANDCorporation",
+      "status": "failed",
+      "added": 0,
+      "stored": 95,
+      "exactFollowersCaptured": false,
+      "searchResponses": 0,
+      "error": "Profile navigation returned HTTP 403.",
+      "retryAt": null
+    }
+  ],
+  "status": "failed",
+  "finishedAt": "2026-11-26T00:37:34.395Z"
+}
